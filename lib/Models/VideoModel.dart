@@ -2,14 +2,8 @@
 //
 //     final videoById = videoByIdFromJson(jsonString);
 
-import 'dart:convert';
-
-VideoById videoByIdFromJson(String str) => VideoById.fromJson(json.decode(str));
-
-String videoByIdToJson(VideoById data) => json.encode(data.toJson());
-
-class VideoById {
-  VideoById({
+class VideoModel {
+  VideoModel({
     required this.kind,
     required this.etag,
     required this.items,
@@ -21,7 +15,7 @@ class VideoById {
   List<Item> items;
   PageInfo? pageInfo;
 
-  factory VideoById.fromJson(Map<String, dynamic> json) => VideoById(
+  factory VideoModel.fromJson(Map<String, dynamic> json) => VideoModel(
         kind: json["kind"],
         etag: json["etag"],
         items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
