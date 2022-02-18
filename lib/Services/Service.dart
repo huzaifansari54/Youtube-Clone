@@ -31,14 +31,13 @@ class ApiService {
     var exploreResponce = await http.get(url, headers: headers);
 
     if (exploreResponce.statusCode == 200) {
-      VideoById videoById =
-          VideoById.fromJson(json.decode(exploreResponce.body));
+      VideoModel video = VideoModel.fromJson(json.decode(exploreResponce.body));
 
-      videos = videoById.items;
+      videos = video.items;
 
       return videos;
     } else {
-      throw ('ERORR');
+      throw (exploreResponce.statusCode);
     }
   }
 
@@ -57,8 +56,8 @@ class ApiService {
     var response = await http.get(url, headers: header);
 
     if (response.statusCode == 200) {
-      VideoById videoById = VideoById.fromJson(json.decode(response.body));
-      item = videoById.items;
+      VideoModel video = VideoModel.fromJson(json.decode(response.body));
+      item = video.items;
       URL = item.first.snippet.thumbnails.medium.url;
 
       return URL;
@@ -82,9 +81,9 @@ class ApiService {
     var responce = await http.get(url, headers: header);
     if (responce.statusCode == 200) {
       print("responce ${responce.body}");
-      VideoById videoById = VideoById.fromJson(json.decode(responce.body));
+      VideoModel video = VideoModel.fromJson(json.decode(responce.body));
 
-      return videoById.items;
+      return video.items;
     } else {
       throw (responce.statusCode);
     }
